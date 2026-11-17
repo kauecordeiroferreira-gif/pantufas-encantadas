@@ -312,9 +312,9 @@ $("#tkM").innerHTML=fill(MODELS,0).map(m=>m.more?`<div class="mc mo"><div class=
 $$("img[data-i]").forEach(i=>i.src=IMG[i.dataset.i]);
 const rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
 function auto(t,sp){t.append(...[...t.children].map(n=>{const k=n.cloneNode(true);k.setAttribute("aria-hidden","true");return k}));let hold=0,over=false,acc=0;
- t.addEventListener("mouseenter",()=>over=true);t.addEventListener("mouseleave",()=>over=false);["touchstart","wheel","pointerdown","focusin"].forEach(e=>t.addEventListener(e,()=>hold=Date.now()+3000,{passive:true}));
- if(rm)return;(function f(){if(!over&&Date.now()>hold){acc+=sp;if(acc>=1){const s=Math.floor(acc);t.scrollLeft+=s;acc-=s}const h=t.scrollWidth/2;if(t.scrollLeft>=h)t.scrollLeft-=h}requestAnimationFrame(f)})()}
-auto($("#tkR"),.4);auto($("#tkM"),.4);
+ t.addEventListener("mouseenter",()=>over=true);t.addEventListener("mouseleave",()=>over=false);["touchstart","wheel","pointerdown","focusin"].forEach(e=>t.addEventListener(e,()=>hold=Date.now()+4000,{passive:true}));
+ if(rm)sp=sp*.6;(function f(){if(!over&&Date.now()>hold){acc+=sp;if(acc>=1){const s=Math.floor(acc);t.scrollLeft+=s;acc-=s}const h=t.scrollWidth/2;if(t.scrollLeft>=h)t.scrollLeft-=h}requestAnimationFrame(f)})()}
+auto($("#tkR"),.25);auto($("#tkM"),.25);
 $$(".car").forEach(c=>{const k=c.querySelector(".tk"),mv=d=>{k.dispatchEvent(new Event("pointerdown"));k.scrollBy({left:d*Math.max(k.clientWidth*.8,200),behavior:rm?"auto":"smooth"})};c.querySelector(".ar.l").onclick=()=>mv(-1);c.querySelector(".ar.n").onclick=()=>mv(1)});
 $$("[data-price]").forEach(e=>e.textContent=CONFIG.OFFERS[e.dataset.price||"basic"].price);
 const num=s=>parseFloat(String(s).replace(".","").replace(",",".")),brl=v=>v.toFixed(2).replace(".",",");
